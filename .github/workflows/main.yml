@@ -17,14 +17,7 @@ jobs:
         password: ${{ secrets.GH_PACKAGES_TOKEN }}
     
     - run: |
-        # Certifique-se de que o nome do repositório está em letras minúsculas
-        DOCKER_REPO=ghcr.io/weriqui/aninhazap
-
-        # Limpe a variável github.ref para usá-la como tag
-        TAG=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
-
-        docker build -t $DOCKER_REPO:$TAG -f Dockerfile .
-        docker tag $DOCKER_REPO:$TAG $DOCKER_REPO:latest
+        docker pull weriqui/aninhazap:tagname
     
     - run: |
         # Faça o push das imagens
