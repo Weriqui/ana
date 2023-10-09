@@ -17,6 +17,7 @@ jobs:
         password: ${{ secrets.GH_PACKAGES_TOKEN }}
     
     - run: |
+        # Puxe a imagem do Docker
         docker pull weriqui/aninhazap:tagname
     
     - run: |
@@ -26,5 +27,10 @@ jobs:
         # Limpe a variável github.ref para usá-la como tag
         TAG=$(echo "${{ github.ref }}" | sed 's/refs\/heads\///')
 
+        # Marque a imagem puxada com o nome do repositório e a tag
+        docker tag weriqui/aninhazap:tagname $DOCKER_REPO:$TAG
+        docker tag weriqui/aninhazap:tagname $DOCKER_REPO:latest
+
+        # Faça o push das imagens marcadas
         docker push $DOCKER_REPO:$TAG
         docker push $DOCKER_REPO:latest
