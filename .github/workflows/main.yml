@@ -2,8 +2,6 @@ name: CI
 
 on:
   workflow_dispatch:
-  
-
 
 jobs:
   build:
@@ -19,9 +17,21 @@ jobs:
         password: ${{ secrets.GH_PACKAGES_TOKEN }}
     
     - run: |
-        docker build -t ghcr.io/Weriqui/aninhazap:tagname -f Dockerfile .
-        docker tag ghcr.io/weriqui/aninhazap:tagname ghcr.io/weriqui/aninhazap:${{ github.sha }}
+        # Certifique-se de que o nome do repositório está em letras minúsculas
+        DOCKER_REPO=ghcr.io/weriqui/aninhazap
+
+        # Use github.ref para definir a tag
+        TAG=${{ github.ref }}
+
+        docker build -t $DOCKER_REPO:$TAG -f Dockerfile .
+        docker tag $DOCKER_REPO:$TAG $DOCKER_REPO:latest
     
     - run: |
-        docker push ghcr.io/weriqui/aninhazap:latest
-        docker push ghcr.io/weriqui/aninhazap:${{ github.sha }}
+        # Faça o push das imagens
+        DOCKER_REPO=ghcr.io/weriqui/aninhazap
+
+        # Use github.ref para definir a tag
+        TAG=${{ github.ref }}
+
+        docker push $DOCKER_REPO:$TAG
+        docker push $DOCKER_REPO:latest
