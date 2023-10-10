@@ -220,7 +220,7 @@ perguntas_respostas = {"quem é?":[respostas["3DECISOR CONFIRMADO"],['']],
     "opa":[respostas["DECISOR CONFIRMADO"],['']],
     "eae":[respostas["DECISOR CONFIRMADO"],['']],
     "diga":[respostas["3DECISOR CONFIRMADO"],['']],
-    "se apresenta":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
+    "se apresenta":[respostas["PERDAO"],["Perdão", f"Me Chamo {nome_assistente}"]],
     "sou eu mesmo":[respostas["2DECISOR CONFIRMADO"],['']],
     "ele mesmo":[respostas["2DECISOR CONFIRMADO"],['']],
     "fala mulher":[respostas["DECISOR CONFIRMADO"],['']],
@@ -299,7 +299,7 @@ perguntas_respostas = {"quem é?":[respostas["3DECISOR CONFIRMADO"],['']],
     "qual assunto?":[respostas["3DECISOR CONFIRMADO"],['']],
     "sim, sobre o que seria?":[respostas["2DECISOR CONFIRMADO"],['']],
     "fale":[respostas["3DECISOR CONFIRMADO"],['']],
-    "você não se apresentou..não sei do que se trata, por isso não deu retorno":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
+    "você não se apresentou..não sei do que se trata, por isso não deu retorno":[respostas["PERDAO"],["Perdão", f"Me Chamo {nome_assistente}"]],
     "segue":[respostas["3DECISOR CONFIRMADO"],['']],
     "prossiga":[respostas["3DECISOR CONFIRMADO"],['']],
     "referente?":[respostas["3DECISOR CONFIRMADO"],['']],
@@ -307,11 +307,11 @@ perguntas_respostas = {"quem é?":[respostas["3DECISOR CONFIRMADO"],['']],
     "não é esse número.":[respostas["TELEFONES INCORRETOS"],respostas["TELEFONES INCORRETOS/JA ME APRESENTEI"]],
     "tudo certo":[respostas["BEM"],["Que ótimo"]],
     "qm ?":[respostas["3DECISOR CONFIRMADO"],['']],
-    "não teu seu contato salvo!":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
-    "quem é, por favor?":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
-    "olá. quem e?":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
-    "não te conheso":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
-    "boa tarde! desculpe, mas não tenho seu número registrado.":[respostas["PERDAO"],["Perdão", "Me Chamo Ana Julia"]],
+    "não teu seu contato salvo!":[respostas["PERDAO"],["Perdão", f"Me Chamo {nome_assistente}"]],
+    "quem é, por favor?":[respostas["PERDAO"],["Perdão", f"{nome_assistente}"]],
+    "olá. quem e?":[respostas["PERDAO"],["Perdão", f"Me Chamo {nome_assistente}"]],
+    "não te conheso":[respostas["PERDAO"],["Perdão", f"Me Chamo {nome_assistente}"]],
+    "boa tarde! desculpe, mas não tenho seu número registrado.":[respostas["PERDAO"],["Perdão", f"Me Chamo {nome_assistente}"]],
     "tudo na paz 🤣💚":[respostas["BEM"],["Que ótimo"]],
     "td bem!":[respostas["BEM"],["Que ótimo"]],
     "de qual empresa? sobre o que?":[respostas["QUE EMPRESA"],[nome_empresa]],
@@ -416,13 +416,14 @@ def enviar_mensagem():
     nome = request.json['nome']
     nome_empresa = request.json['nome_empresa']
     whatsid = request.json['whatsid']
+    nome_assistente = request.json['nome_assistente']
 
     if len(vericarSeApresentei(whatsid)) > 0:
         verifica = vericarSeApresentei(whatsid)[0]
         resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa)
         if verifica[2] == 0:
             if verifica[1] == 0:
-                if "Olá, me chamo Ana Julia, da Villela Bank." in resposta_bot[0] or "Me chamo Ana Julia, da Villela Bank." in resposta_bot[0]:
+                if f"Olá, me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0] or f"Me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0]:
                     atualiza(whatsid,1)
                 elif "NÃO LER" in resposta_bot[0] or "PEDIU PRA LIGAR" in resposta_bot[0]:
                     desliga(whatsid,1)
@@ -435,7 +436,7 @@ def enviar_mensagem():
             return jsonify({'resposta':['']})
     else:
         resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa)
-        if "Olá, me chamo Ana Julia, da Villela Bank." in resposta_bot[0] or "Me chamo Ana Julia, da Villela Bank." in resposta_bot[0]:
+        if f"Olá, me {nome_assistente}, da Villela Bank." in resposta_bot[0] or "Me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0]:
             apresentei(whatsid,1,0)
         elif "NÃO LER" in resposta_bot[0] or "PEDIU PRA LIGAR" in resposta_bot[0]:
             apresentei(whatsid,0,1)
