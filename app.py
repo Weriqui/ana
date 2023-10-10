@@ -420,7 +420,7 @@ def enviar_mensagem():
 
     if len(vericarSeApresentei(whatsid)) > 0:
         verifica = vericarSeApresentei(whatsid)[0]
-        resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa)
+        resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa,nome_assistente)
         if verifica[2] == 0:
             if verifica[1] == 0:
                 if f"Olá, me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0] or f"Me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0]:
@@ -435,7 +435,7 @@ def enviar_mensagem():
         else:
             return jsonify({'resposta':['']})
     else:
-        resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa)
+        resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa,nome_assistente)
         if f"Olá, me {nome_assistente}, da Villela Bank." in resposta_bot[0] or "Me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0]:
             apresentei(whatsid,1,0)
         elif "NÃO LER" in resposta_bot[0] or "PEDIU PRA LIGAR" in resposta_bot[0]:
