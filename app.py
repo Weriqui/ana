@@ -198,7 +198,7 @@ respostas = {
             "NÃO LER"
         ],
         "TELEFONES INCORRETOS":[
-            f"Olá, me {nome_assistente}, da Villela Brasil Bank",
+            f"Olá, me chamo {nome_assistente}, da Villela Brasil Bank",
             "Acredito que me enganei... estou tentando conato com:",
             f"{nome_empresa} ou {nome}",
             "Desculpe o inconveniente.",
@@ -436,7 +436,7 @@ def enviar_mensagem():
             return jsonify({'resposta':['']})
     else:
         resposta_bot = obter_resposta(mensagem_usuario,nome,nome_empresa,nome_assistente)
-        if f"Olá, me {nome_assistente}, da Villela Bank." in resposta_bot[0] or "Me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0]:
+        if f"Olá, me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0] or "Me chamo {nome_assistente}, da Villela Bank." in resposta_bot[0]:
             apresentei(whatsid,1,0)
         elif "NÃO LER" in resposta_bot[0] or "PEDIU PRA LIGAR" in resposta_bot[0]:
             apresentei(whatsid,0,1)
