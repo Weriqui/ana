@@ -2,7 +2,7 @@
 FROM python:3.9
 
 # Diretório de trabalho no contêiner
-WORKDIR /apphttps://github.com/Weriqui/ana/blob/main/dockerfile
+WORKDIR app
 
 # Copiar os arquivos do seu diretório local para o diretório de trabalho no contêiner
 COPY . /app
