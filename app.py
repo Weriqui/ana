@@ -59,19 +59,19 @@ def apresentei(whatsid,apresentei:bool,desliga:bool):
 def desliga(whatsid,desliga:bool):
   # Conectar ao banco de dados
   conn = mysql.connector.connect(
-      host="whats.c9zdqqj5d3xf.us-east-2.rds.amazonaws.com",
+      host="database-1.cdghjo9esjwu.us-east-2.rds.amazonaws.com",
       port="3306",
-      user="weriqui",
-      password="Werique18",
+      user="root",
+      password="administrador",
       database="ana"
   )
 def atualiza(whatsid,apresentei:bool):
   # Conectar ao banco de dados
   conn = mysql.connector.connect(
-      host="whats.c9zdqqj5d3xf.us-east-2.rds.amazonaws.com",
+      host="database-1.cdghjo9esjwu.us-east-2.rds.amazonaws.com",
       port="3306",
-      user="weriqui",
-      password="Werique18",
+      user="root",
+      password="administrador",
       database="ana"
   )
 
